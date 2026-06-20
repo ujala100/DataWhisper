@@ -336,6 +336,18 @@ def authenticate_user():
         )
 
     with col2:
+        if st.session_state.get("registration_success"):
+        st.success(
+            "User registered successfully! Please login with your credentials."
+        )
+        del st.session_state["registration_success"]
+
+    auth_choice = st.radio(
+        "Action",
+        ["Login", "Register"],
+        label_visibility="collapsed",
+        horizontal=True
+    )
         auth_choice = st.radio("Action", ["Login", "Register"], label_visibility="collapsed", horizontal=True)
         
         if auth_choice == "Login":
@@ -413,7 +425,7 @@ def authenticate_user():
                 if result:
                     with open(config_path, 'w') as file:
                         yaml.dump(config, file, default_flow_style=False)
-                    st.success('User registered successfully! Please login with your credentials.')
+                    st.session_state('User registered successfully! Please login with your credentials.')
                     st.rerun()
             except Exception as e:
                 st.error(f"Registration error: {str(e)}")
