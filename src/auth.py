@@ -336,18 +336,6 @@ def authenticate_user():
         )
 
     with col2:
-        if st.session_state.get("registration_success"):
-        st.success(
-            "User registered successfully! Please login with your credentials."
-        )
-        del st.session_state["registration_success"]
-
-    auth_choice = st.radio(
-        "Action",
-        ["Login", "Register"],
-        label_visibility="collapsed",
-        horizontal=True
-    )
         auth_choice = st.radio("Action", ["Login", "Register"], label_visibility="collapsed", horizontal=True)
         
         if auth_choice == "Login":
